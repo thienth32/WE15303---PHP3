@@ -26,8 +26,18 @@ class HomeController extends Controller
     }
 
     public function saveInfo(Request $request){
+        // dd($request->all());
         $name =  $request->name;
         $age =  $request->age;
-        dd($name, $age);
+        $gender =  "";
+        if($request->gender == 1){
+            $gender = "Nam";
+        }else if($request->gender == 2){
+            $gender = "Nữ";
+        }else {
+            $gender = "Khác";
+        }
+        $isMarried =  $request->has('isMarried') ? "Đã lập gia đình" : "Độc thân"; 
+        return view('users.show-info', compact('name', 'age', 'gender', 'isMarried'));
     }
 }
