@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
+use App\Models\User;
+use App\Models\Category;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +27,11 @@ Route::get('users/detail/{id}', [HomeController::class, 'detail']);
 // truyền dữ liệu từ đường dẫn a => đường dẫn b
 Route::get('info', [HomeController::class, 'infoForm']);
 Route::get('luu-info', [HomeController::class, 'saveInfo'])->name('save.info');
-
+Route::get('test-connection', function(){
+    $users = User::all();
+    $cates = Category::all();
+    dd($cates);
+});
 
 /**
  * trong form đc sinh ra từ url: 'info'
