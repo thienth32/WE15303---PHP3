@@ -23,6 +23,8 @@ Route::get('/', function () {
     return view('welcome', compact('products'));
 })->name('homepage');
 
+Route::get('products', [HomeController::class, 'productList']);
+
 Route::get('users/{name}/{age?}', function($name, $age = 1){
     return route('demo_route', ['id' => 100]);
 });

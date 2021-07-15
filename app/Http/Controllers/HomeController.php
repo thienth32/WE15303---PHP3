@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -13,6 +14,11 @@ class HomeController extends Controller
         // hiển thị giao diện trong thư mục views/users/index.blade.php
         // truyền biến $users ra ngoài views
         return view('users.index', compact('users'));
+    }
+
+    public function productList(){
+        $products = Product::orderByDesc('id')->paginate(20);
+        return view('product.list', compact('products'));
     }
 
     public function detail($thienth){
