@@ -33,7 +33,7 @@
         <th>Giá</th>
         <th>Số lượng</th>
         <th>
-
+            <a href="{{route('product.add')}}">Tạp mới</a>
         </th>
     </thead>
     <tbody>
@@ -48,9 +48,10 @@
             <td>{{$p->price}}</td>
             <td>{{$p->quantity}}</td>
             <td>
-
+                <a href="{{route('product.remove', ['id' => $p->id])}}">Xóa</a>
             </td>
         </tr>
         @endforeach
     </tbody>
 </table>
+{{$product_data->links()}}

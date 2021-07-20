@@ -35,6 +35,7 @@ class ProductController extends Controller
         // 1. dựa vào model Product lấy toàn bộ data trong db
         $cates = Category::all();
         $products = $productQuery->paginate($pagesize);
+        $products->appends($request->except('page'));
         // dd($products->currentPage());
         // 2. sinh ra màn hình danh sách với dữ liệu đã lấy đc
         return view('admin.product.index', 
@@ -42,5 +43,15 @@ class ProductController extends Controller
                 'product_data' => $products,
                 'cates' => $cates,
             ]);
+    }
+
+    public function remove($id){
+        Product::destroy($id);
+        return redirect()->back();
+    }
+
+    public function addForm(){
+        $cates = Category::all();
+        return view('admin.product.add-form', compact('cates'));
     }
 }
