@@ -39,7 +39,7 @@
     <tbody>
         @foreach($product_data as $p)
         <tr>
-            <td>{{$loop->iteration}}</td>
+            <td>{{(($product_data->currentPage()-1)*config('common.default_page_size')) + $loop->iteration}}</td>
             <td>{{$p->name}}</td>
             <td>
                 <img src="{{asset('storage/' . $p->image)}}" width="70">

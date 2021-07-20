@@ -10,29 +10,32 @@ use App\Models\Category;
 class ProductController extends Controller
 {
     public function index(Request $request){
+        $pagesize = config('common.default_page_size');
         // nhận dữ liệu từ form gửi lên & thực hiện filter
         $productQuery = Product::where('name', 'like', "%".$request->keyword."%");
+
         if($request->has('cate_id') && $request->cate_id > 0){
-            $productQuery = $productQuery->where('cate_id', $request->cate_id);
+            $productQuery->where('cate_id', $request->cate_id);
         }
         if($request->has('order_by') && $request->order_by > 0){
             if($request->order_by == 1){
-                $productQuery = $productQuery->orderBy('name');
+                $productQuery->orderBy('name');
             }else if($request->order_by == 2){
-                $productQuery = $productQuery->orderByDesc('name');
+                $productQuery->orderByDesc('name');
             }else if($request->order_by == 3){
-                $productQuery = $productQuery->orderBy('price');
+                $productQuery->orderBy('price');
             }else if($request->order_by == 4){
-                $productQuery = $productQuery->orderByDesc('price');
+                $productQuery->orderByDesc('price');
             }else if($request->order_by == 5){
-                $productQuery = $productQuery->orderBy('quantity');
+                $productQuery->orderBy('quantity');
             }else{
-                $productQuery = $productQuery->orderByDesc('quantity');
+                $productQuery->orderByDesc('quantity');
             }
         }
         // 1. dựa vào model Product lấy toàn bộ data trong db
         $cates = Category::all();
-        $products = $productQuery->get();
+        $products = $productQuery->paginate($pagesize);
+        // dd($products->currentPage());
         // 2. sinh ra màn hình danh sách với dữ liệu đã lấy đc
         return view('admin.product.index', 
             [

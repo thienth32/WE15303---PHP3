@@ -7,7 +7,15 @@ return [
         4 => 'Sắp xép theo giá giảm dần',
         5 => 'Sắp xép theo số lượng tăng dần',
         6 => 'Sắp xép theo số lượng giảm dần',
-    ]
+    ],
+    'page_size' => [
+        20,
+        40,
+        80,
+        100
+    ],
+    'default_page_size' => 20
+
 ]
 
 
