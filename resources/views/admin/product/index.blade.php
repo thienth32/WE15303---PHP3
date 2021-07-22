@@ -48,6 +48,7 @@
             <td>{{$p->price}}</td>
             <td>{{$p->quantity}}</td>
             <td>
+                <a href="{{route('product.edit', ['id' => $p->id])}}">Sửa</a>
                 <a href="{{route('product.remove', ['id' => $p->id])}}">Xóa</a>
             </td>
         </tr>

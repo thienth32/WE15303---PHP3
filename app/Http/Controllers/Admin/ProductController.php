@@ -55,6 +55,15 @@ class ProductController extends Controller
         return view('admin.product.add-form', compact('cates'));
     }
 
+    public function editForm($id){
+        $product = Product::find($id);
+        if(!$product){
+            return redirect()->back();
+        }
+        $cates = Category::all();
+        return view('admin.product.edit-form', compact('product', 'cates'));
+    }
+
     public function saveAdd(Request $request){
         $model = new Product();
         // gán gtri cho các thuộc tính của object sử dụng massassign ($fillable trong model)
@@ -68,5 +77,20 @@ class ProductController extends Controller
         $model->save();
         return redirect(route('product.index'));
         
+    }
+
+    public function saveEdit($id, Request $request){
+        $model = Product::find($id);
+        if(!$model){
+            return redirect(route('product.index'));
+        }
+        $model->fill($request->all());
+        if($request->hasFile('file_upload')){
+            $newFileName = uniqid(). '-' . $request->file_upload->getClientOriginalName();
+            $path = $request->file_upload->storeAs('public/uploads/products', $newFileName);
+            $model->image = str_replace('public/', '', $path);
+        }
+        $model->save();
+        return redirect(route('product.index'));
     }
 }
