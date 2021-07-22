@@ -93,4 +93,11 @@ class ProductController extends Controller
         $model->save();
         return redirect(route('product.index'));
     }
+
+    public function demo(){
+        $id = 1;
+        $product = Product::find(1);
+        // dd($product);
+        dd($product->getQuantity());
+    }
 }
