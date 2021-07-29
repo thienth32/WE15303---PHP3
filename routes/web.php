@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use App\Models\Category;
@@ -29,9 +30,7 @@ Route::get('users/{name}/{age?}', function($name, $age = 1){
     return route('demo_route', ['id' => 100]);
 });
 
-Route::get('dang-nhap', function(){
-    return "trang đăng nhập";
-})->name('login');
+Route::get('dang-nhap', [LoginController::class, 'loginForm'])->name('login');
 
 Route::get('demo-name/{id}', function($id){
     return $id;
