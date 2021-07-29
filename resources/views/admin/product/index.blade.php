@@ -1,3 +1,6 @@
+@extends('admin.layouts.main')
+@section('title', 'PT15303 - Quản trị sản phẩm')
+@section('content')
 <fieldset>
     <legend>Tìm kiếm</legend>
     <form action="" method="get">
@@ -56,3 +59,5 @@
     </tbody>
 </table>
 {{$product_data->links()}}
+
+@endsection

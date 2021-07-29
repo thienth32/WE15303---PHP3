@@ -18,4 +18,6 @@ Route::prefix('san-pham')->group(function () {
     
 });
 
+Route::view('demo', 'admin.layouts.main');
+
 ?>
