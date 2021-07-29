@@ -70,6 +70,10 @@
         @endforeach
     </tbody>
 </table>
-{{$product_data->links()}}
+<div class="row">
+    <div class="col-6 offset-3 d-flex justify-content-center">
+        {{$product_data->links()}}
+    </div>
+</div>
 
 @endsection
