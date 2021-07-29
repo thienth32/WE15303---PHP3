@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use App\Models\Category;
 use App\Models\Product;
+use Illuminate\Support\Facades\Hash;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,7 +32,10 @@ Route::get('users/{name}/{age?}', function($name, $age = 1){
 });
 
 Route::get('dang-nhap', [LoginController::class, 'loginForm'])->name('login');
-
+Route::post('dang-nhap', [LoginController::class, 'postLogin']);
+Route::get('fake-password/{mk?}', function($mk = '123456'){
+    return Hash::make($mk);
+});
 Route::get('demo-name/{id}', function($id){
     return $id;
 })->middleware(['auth'])->name('demo_route');
