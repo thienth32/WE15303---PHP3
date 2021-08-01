@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProductFormRequest;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
@@ -64,7 +65,7 @@ class ProductController extends Controller
         return view('admin.product.edit-form', compact('product', 'cates'));
     }
 
-    public function saveAdd(Request $request){
+    public function saveAdd(ProductFormRequest $request){
         $model = new Product();
         // gán gtri cho các thuộc tính của object sử dụng massassign ($fillable trong model)
         $model->fill($request->all());
@@ -79,7 +80,7 @@ class ProductController extends Controller
         
     }
 
-    public function saveEdit($id, Request $request){
+    public function saveEdit($id, ProductFormRequest $request){
         $model = Product::find($id);
         if(!$model){
             return redirect(route('product.index'));
@@ -94,10 +95,4 @@ class ProductController extends Controller
         return redirect(route('product.index'));
     }
 
-    public function demo(){
-        $id = 1;
-        $product = Product::find(1);
-        // dd($product);
-        dd($product->getQuantity());
-    }
 }

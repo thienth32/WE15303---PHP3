@@ -6,14 +6,17 @@
         <div class="col-6">
             <div class="form-group">
                 <label for="">Tên sản phẩm</label>
-                <input type="text" name="name" class="form-control" value="{{$product->name}}">
+                <input type="text" name="name" class="form-control" value="{{old('name', $product->name)}}">
+                @error('name')
+                    <span class="text-danger">{{$message}}</span>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="">Danh mục</label>
                 <select name="cate_id" class="form-control" >
                     @foreach($cates as $c)
                     <option 
-                        @if($c->id == $product->cate_id)
+                        @if($c->id == old('cate_id', $product->cate_id))
                         selected
                         @endif
                     value="{{$c->id}}">{{$c->name}}</option>
@@ -23,16 +26,25 @@
             <div class="form-group">
                 <label for="">ảnh</label>
                 <input type="file" name="file_upload" class="form-control">
+                @error('file_upload')
+                    <span class="text-danger">{{$message}}</span>
+                @enderror
             </div>
         </div>
         <div class="col-6">
             <div class="form-group">
                 <label for="">Giá</label>
-                <input type="text" name="price" value="{{$product->price}}" class="form-control">
+                <input type="text" name="price" value="{{old('price', $product->price)}}" class="form-control">
+                @error('price')
+                    <span class="text-danger">{{$message}}</span>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="">Số lượng</label>
-                <input type="text" name="quantity" value="{{$product->quantity}}" class="form-control">
+                <input type="text" name="quantity" value="{{old('quantity', $product->quantity)}}" class="form-control">
+                @error('quantity')
+                    <span class="text-danger">{{$message}}</span>
+                @enderror
             </div>
             
         </div>
