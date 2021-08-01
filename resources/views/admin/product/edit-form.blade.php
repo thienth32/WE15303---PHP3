@@ -1,34 +1,44 @@
+@extends('admin.layouts.main')
+@section('content')
 <form action="" method="POST" enctype="multipart/form-data">
     @csrf
-    <div>
-        <label for="">Tên sản phẩm</label>
-        <input type="text" name="name" value="{{$product->name}}">
-    </div>
-    <div>
-        <label for="">Danh mục</label>
-        <select name="cate_id" >
-            @foreach($cates as $c)
-            <option 
-                @if($c->id == $product->cate_id)
-                selected
-                @endif
-            value="{{$c->id}}">{{$c->name}}</option>
-            @endforeach
-        </select>
-    </div>
-    <div>
-        <label for="">ảnh</label>
-        <input type="file" name="file_upload">
-    </div>
-    <div>
-        <label for="">Giá</label>
-        <input type="text" name="price" value="{{$product->price}}">
-    </div>
-    <div>
-        <label for="">Số lượng</label>
-        <input type="text" name="quantity" value="{{$product->quantity}}">
-    </div>
-    <div class="">
-        <button type="submit">Lưu</button>
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group">
+                <label for="">Tên sản phẩm</label>
+                <input type="text" name="name" class="form-control" value="{{$product->name}}">
+            </div>
+            <div class="form-group">
+                <label for="">Danh mục</label>
+                <select name="cate_id" class="form-control" >
+                    @foreach($cates as $c)
+                    <option 
+                        @if($c->id == $product->cate_id)
+                        selected
+                        @endif
+                    value="{{$c->id}}">{{$c->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="">ảnh</label>
+                <input type="file" name="file_upload" class="form-control">
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-group">
+                <label for="">Giá</label>
+                <input type="text" name="price" value="{{$product->price}}" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="">Số lượng</label>
+                <input type="text" name="quantity" value="{{$product->quantity}}" class="form-control">
+            </div>
+            
+        </div>
+        <div class="col-12 d-flex justify-content-end">
+            <button class="btn btn-primary" type="submit">Lưu</button>
+        </div>
     </div>
 </form>
+@endsection
