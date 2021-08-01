@@ -3,9 +3,8 @@
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
-use App\Models\User;
-use App\Models\Category;
 use App\Models\Product;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 /*
@@ -33,6 +32,12 @@ Route::get('users/{name}/{age?}', function($name, $age = 1){
 
 Route::get('dang-nhap', [LoginController::class, 'loginForm'])->name('login');
 Route::post('dang-nhap', [LoginController::class, 'postLogin']);
+
+Route::get('dang-xuat', function(){
+    Auth::logout();
+    return redirect(route('homepage'));
+})->name('login');
+
 Route::get('fake-password/{mk?}', function($mk = '123456'){
     return Hash::make($mk);
 });

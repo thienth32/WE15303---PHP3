@@ -21,7 +21,7 @@
   </div>
   <!-- /.login-logo -->
   <div class="card">
-    <div class="card-body login-card-body">
+    <div class="card-body login-card-body" >
         @if(session('msg'))
             <p class="text-danger">{{session('msg')}}</p>
         @else
@@ -29,24 +29,31 @@
         @endif
       
 
-      <form action="" method="post">
+      <form action="" method="post" novalidate>
           @csrf
         <div class="input-group mb-3">
           <input type="email" class="form-control" name="email" placeholder="Email">
+          
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
             </div>
           </div>
         </div>
+        @error('email')
+          <p class="text-danger">{{$message}}</p>
+        @enderror
         <div class="input-group mb-3">
           <input type="password" class="form-control" name="password" placeholder="Password">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
             </div>
-          </div>
+          </div>          
         </div>
+        @error('password')
+          <p class="text-danger">{{$message}}</p>
+        @enderror
         <div class="row">
           <div class="col-8">
             <div class="icheck-primary">

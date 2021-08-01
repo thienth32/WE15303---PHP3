@@ -48,7 +48,7 @@
         <th>Giá</th>
         <th>Số lượng</th>
         <th>
-            <a href="{{route('product.add')}}">Tạp mới</a>
+            <a href="{{route('product.add')}}">Tạo mới</a>
         </th>
     </thead>
     <tbody>
