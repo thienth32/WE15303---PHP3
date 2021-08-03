@@ -13,7 +13,10 @@ Route::prefix('san-pham')->group(function () {
     Route::get('/tao-moi', [ProductController::class, 'addForm'])->name('product.add');
     Route::post('/tao-moi', [ProductController::class, 'saveAdd']);
     Route::get('/cap-nhat/{id}', [ProductController::class, 'editForm'])->name('product.edit');
-    Route::post('/cap-nhat/{id}', [ProductController::class, 'saveEdit']);
+    
+    Route::post('/cap-nhat/{id}', 
+                    [ProductController::class, 'saveEdit'])->middleware('log_edit_product');
+                    
     Route::get('demo', [ProductController::class, 'demo']);
     
 });
