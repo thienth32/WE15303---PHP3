@@ -1,5 +1,8 @@
 @extends('admin.layouts.main')
 @section('content')
+@if(session('msg') != "")
+    <p class="text-danger">{{session('msg')}}</p>
+@endif
 <form action="" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="row">

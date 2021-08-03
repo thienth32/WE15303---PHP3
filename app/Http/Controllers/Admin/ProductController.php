@@ -7,6 +7,7 @@ use App\Http\Requests\ProductFormRequest;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -35,6 +36,10 @@ class ProductController extends Controller
         }
         // 1. dựa vào model Product lấy toàn bộ data trong db
         $cates = Category::all();
+
+        // $productQuery->where('created_by', Auth::id());
+
+
         $products = $productQuery->paginate($pagesize);
         $products->appends($request->except('page'));
         // dd($products->currentPage());

@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Product;
 use Carbon\Carbon;
 use Closure;
 use Illuminate\Http\Request;
@@ -29,9 +30,13 @@ class ProductEditLog
         //     'price' => $request->price,
         //     'quantity' => $request->quantity
         // ]);
-        Log::info("Product Id: " . $request->id 
-                    . " - user: " . Auth::id() 
-                    . ' - time: ' . Carbon::now()->format('Y-m-d H:i:s'));
+        // Log::info("Product Id: " . $request->id 
+        //             . " - user: " . Auth::id() 
+        //             . ' - time: ' . Carbon::now()->format('Y-m-d H:i:s'));
+        $obj = Product::find($request->id);
+        if($obj->created_by != Auth::id()){
+            return redirect()->back()->with('msg', 'Bạn không có quyền sửa sản phẩm này');
+        }
         return $next($request);
     }
 }
