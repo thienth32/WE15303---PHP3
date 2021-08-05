@@ -15,8 +15,17 @@ class Product extends Model
         'name', 'cate_id', 'price', 'quantity'
     ];
 
+    public function category(){
+        // quan hệ n -> 1 (từ bảng con => bảng cha)
+        return $this->belongsTo(Category::class, 'cate_id');
+    }
+
     public function quantities(){
         return $this->hasMany(ProductQuantity::class, 'product_id');
+    }
+
+    public function tags(){
+        return $this->belongsToMany(Tag::class, 'product_tags', 'product_id', 'tag_id');
     }
 
     public function getQuantity(){

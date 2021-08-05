@@ -1,4 +1,6 @@
 <?php
+
+use App\Http\Controllers\Admin\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ProductController;
 
@@ -17,9 +19,12 @@ Route::prefix('san-pham')->group(function () {
     Route::post('/cap-nhat/{id}', 
                     [ProductController::class, 'saveEdit'])->middleware('log_edit_product');
                     
-    Route::get('demo', [ProductController::class, 'demo']);
-    
+    Route::get('demo-product-tag', [ProductController::class, 'demo']);
 });
+Route::prefix('danh-muc')->group(function(){
+    Route::get('/', [CategoryController::class, 'index'])->name('cate.index');
+});
+
 
 Route::view('demo', 'admin.layouts.main');
 

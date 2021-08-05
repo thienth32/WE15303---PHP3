@@ -47,6 +47,7 @@
         <th>Danh mục</th>
         <th>Giá</th>
         <th>Số lượng</th>
+        <th>Tags</th>
         <th>
             <a href="{{route('product.add')}}">Tạo mới</a>
         </th>
@@ -59,9 +60,14 @@
             <td>
                 <img src="{{asset('storage/' . $p->image)}}" width="70">
             </td>
-            <td>{{$p->cate_id}}</td>
+            <td>{{$p->category->name}}</td>
             <td>{{$p->price}}</td>
             <td>{{$p->quantity}}</td>
+            <td>
+                @foreach ($p->tags as $t)
+                <span style="border: 1px solid #ccc">{{$t->name}}</span>
+                @endforeach
+            </td>
             <td>
                 <a href="{{route('product.edit', ['id' => $p->id])}}">Sửa</a>
                 <a href="{{route('product.remove', ['id' => $p->id])}}">Xóa</a>

@@ -7,6 +7,8 @@ use App\Http\Requests\ProductFormRequest;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\ProductTag;
+use App\Models\Tag;
 use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
@@ -41,6 +43,7 @@ class ProductController extends Controller
 
 
         $products = $productQuery->paginate($pagesize);
+        $products->load('category', 'tags');
         $products->appends($request->except('page'));
         // dd($products->currentPage());
         // 2. sinh ra màn hình danh sách với dữ liệu đã lấy đc
@@ -98,6 +101,15 @@ class ProductController extends Controller
         }
         $model->save();
         return redirect(route('product.index'));
+    }
+
+    public function demo(){
+        $product = Product::find(9);
+        
+        $tagArr = [1, 3];
+        $product->tags()->sync($tagArr);
+        return 'done';
+        
     }
 
 }
