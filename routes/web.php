@@ -4,6 +4,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -44,3 +45,17 @@ Route::get('fake-password/{mk?}', function($mk = '123456'){
 Route::get('demo-name/{id}', function($id){
     return $id;
 })->middleware(['auth'])->name('demo_route');
+
+Route::get('demo-phan-quyen', function(){
+    $admin = User::find(4);
+    $thienth = User::find(5);
+
+    $admin->givePermissionTo('show product');
+    $admin->givePermissionTo('remove user');
+
+    $thienth->givePermissionTo('show product');
+    $thienth->givePermissionTo('add product');
+    $thienth->givePermissionTo('edit product');
+    $thienth->givePermissionTo('remove product');
+    
+});
